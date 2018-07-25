@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Rectangle Bean -->
+	<bean id="rectangleShape" class="com.example.Rectangle" />
+
+	<!-- Inject rectangleShape via setter/property method -->
+	<bean id="geometryExample2" class="com.example.GeometryExample2">
+		<property name="geometry" ref="rectangleShape"></property>
+	</bean>
+</beans>
