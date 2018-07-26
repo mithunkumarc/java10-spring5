@@ -1,0 +1,128 @@
+In Spring framework, 
+the @Primary annotation is used to give higher preference to a bean, when there are multiple beans of same type.
+
+The @Primary annotation may be used on any class directly or 
+indirectly annotated with @Component or on methods annotated with @Bean.
+
+In this example, among two bank accounts,  one of the BankAccount choosen as salary account using primary annotation.
+
+1.create java project
+2.configure to maven
+3.add dependencies in pom.xml
+<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.3.4.RELEASE</version>
+		</dependency>
+	</dependencies>
+  
+  
+4.BankAccount class
+package com.example;
+
+public class BankAccount {
+	public void getSalary() {
+		System.out.println("salary added to general bank account");
+	}
+}
+
+
+5.creating two BankAccounts HDFC and ICICI. here confusion created for spring container which one to choose for dependency
+
+package com.example;
+import org.springframework.stereotype.Component;
+
+@Component
+public class HDFC extends BankAccount{
+	@Override
+	public void getSalary() {
+		System.out.println("salary added to hdfc");
+	}
+}
+
+and
+
+package com.example;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ICICI extends BankAccount{
+	@Override
+	public void getSalary() {
+		System.out.println("salary added to icici");
+	}
+}
+
+
+
+6. SalaryAccount needs a BankAccount as dependency
+package com.example;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class SalaryAccount {
+	BankAccount bankAccount;
+	
+	@Autowired
+	public void setBankAccount(BankAccount bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+  
+	public void getBalance() {
+		this.bankAccount.getSalary();
+	}
+  
+}
+
+
+7.Testing above code
+package com.example;
+
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Test {
+	public static void main(String[] args) {
+		AnnotationConfigApplicationContext context =
+				new AnnotationConfigApplicationContext(AppConfig.class);
+		SalaryAccount salaryAccount = context.getBean(SalaryAccount.class);
+		salaryAccount.getBalance();
+	}
+}
+
+
+
+8.output :  expected single matching bean but found 2: HDFC,ICICI
+org.springframework.beans.factory.UnsatisfiedDependencyException: 
+Error creating bean with name 'salaryAccount': 
+Unsatisfied dependency expressed through method 'setBankAccount' parameter 0; 
+nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: 
+No qualifying bean of type 'com.example.BankAccount' available: expected single matching bean but found 2: HDFC,ICICI
+
+
+9.solution : select one of the bankaccount as primary using primary annotation. let ICICI chosen as primary
+
+package com.example;
+
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Component;
+
+@Component
+@Primary
+public class ICICI extends BankAccount{
+	@Override
+	public void getSalary() {
+		System.out.println("salary added to icici");
+	}
+}
+
+
+
+10. output : salary added to icici
+
+
+
+
