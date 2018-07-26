@@ -34,3 +34,16 @@ public class MailService {
       System.out.println("Inside destroy method - "+map);
    }
 }
+
+/* alternate for @PostConstruct and @PreDestroy annotations
+
+   1.In AppConfig add below dependency
+   2.remove @PostConstruct and @PreDestroy annotations
+    
+    @Bean(initMethod="init",destroyMethod="destroy")
+      public MailService getMailService() {
+      return new MailService();
+   }
+
+*/
+
