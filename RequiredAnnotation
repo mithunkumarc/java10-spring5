@@ -1,0 +1,120 @@
+/*
+The @Required annotation is method-level annotation and applied to the setter method of a bean.
+This annotation simply indicates that the setter method must be configured to be dependency-injected 
+with a value at configuration time.
+
+@Required property must be injected by mentioning @autowired.
+*/
+
+1.create java project
+2.convert to maven
+3.pom.xml dependencies
+<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.3.4.RELEASE</version>
+		</dependency>
+	</dependencies>
+  
+4.Customer class , obj of this class requred BankAccount object
+package com.example;
+
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Customer {
+	private BankAccount bankAccount;
+	
+	@Required
+	public void setBankAccount(BankAccount bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+	
+	public void deposit(float amount) {
+		System.out.println("deposited "+amount+ " to "+bankAccount.accountNumber);
+	}	
+}
+
+
+5.BankAccount class
+
+package com.example;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class BankAccount {
+	String accountNumber = "23456";	
+}
+
+
+6.Appconfig class
+/*@configure + @componentscan = scan all components in this package and instantiate it(configure it) */
+package com.example;
+
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ComponentScan(basePackages = "com.example")
+public class AppConfig {
+
+}
+
+
+7.Test class
+package com.example;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class Test {
+	public static void main(String[] args) {
+		AnnotationConfigApplicationContext context = 
+	            new AnnotationConfigApplicationContext(AppConfig.class);
+	      
+	      Customer customer = context.getBean(Customer.class);
+	      customer.deposit(5000);
+	      
+	      context.close();
+	}
+}
+
+
+8.output : 
+Exception in thread "main" org.springframework.beans.factory.BeanCreationException: 
+Error creating bean with name 'customer' defined in file 
+Initialization of bean failed; nested exception is org.springframework.beans.factory.BeanInitializationException: 
+Property 'bankAccount' is required for bean 'customer'
+
+
+
+9.add @Autowired to BankAccount property of Customer class
+package com.example;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Customer {
+	private BankAccount bankAccount;
+	
+	@Required
+	@Autowired
+	public void setBankAccount(BankAccount bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+	
+	public void deposit(float amount) {
+		System.out.println("deposited "+amount+ " to "+bankAccount.accountNumber);
+	}	
+}
+
+10.output :
+deposited 5000.0 to 23456
+
+
+
+
