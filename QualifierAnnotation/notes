@@ -6,3 +6,6 @@ The @Qualifier annotation is used to resolve the autowiring conflict, when there
 
 The @Qualifier annotation can be used on any class annotated with @Component or on method annotated with @Bean. 
 This annotation can also be applied on constructor arguments or method parameters.
+
+absence of Qualifier annotation leads to NoUniqueBeanDefinitionException error.
+ expected single matching bean but found 2(or more , equal to number of same type of beans you defined)
