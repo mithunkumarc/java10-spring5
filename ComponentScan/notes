@@ -1,0 +1,33 @@
+The @Controller, @Service and @Repository annotations similar(all are beans) to @Component with different purpose.
+
+@Service : service classes
+@Repository : Dao classes
+
+Spring provides four stereotype annotations: @Component, @Controller, @Service and @Repository for spring-managed components.
+
+The @Controller, @Service and @Repository annotations are specializations of the @Component annotation for more specific purpose in presentation, service and data access layer respectively.
+
+In Spring framework, we can enable the auto component scanning by using
+
+    The <context:component-scan/> element in XML based configuration
+    The @ComponentScan annotation in java based configuration
+    The AnnotationConfigApplicationContext#scan() method
+    
+    1) The @Component annotation marks a java class as a bean so the component-scanning mechanism of spring can 
+    pick it up and pull it into the application context. 
+    
+    2) Although above use of @Component is good enough but you can use more suitable annotation that provides 
+    additional benefits specifically for DAOs i.e. @Repository annotation. 
+    The @Repository annotation is a specialization of the @Component annotation with similar use and functionality. 
+    In addition to importing the DAOs into the DI container, it also makes the unchecked exceptions 
+    (thrown from DAO methods) eligible for translation into Spring DataAccessException.
+
+    3) The @Service annotation is also a specialization of the component annotation. 
+    It doesn’t currently provide any additional behavior over the @Component annotation, 
+    but it’s a good idea to use @Service over @Component in service-layer classes because it specifies intent better. 
+    Additionally, tool support and additional behavior might rely on it in the future.
+
+    4) @Controller annotation marks a class as a Spring Web MVC controller. 
+    It too is a @Component specialization, so beans marked with it are automatically imported into the DI container. 
+    When you add the @Controller annotation to a class, you can use another annotation i.e.
+    @RequestMapping; to map URLs to instance methods of a class.
