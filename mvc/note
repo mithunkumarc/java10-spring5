@@ -1,0 +1,33 @@
+two configuration files, you can have multiple configuration files
+
+//mention below classes in webappinitializer to allow container load all beans configured in these classes
+WebConfig class : for scanning webcomponents specific beans such as view resolver.
+RootConfig.class : for scanning components / beans service layer or dao layer beans.
+
+@componentscan(package = "package name") will scan all components in specific package
+
+@EnableWebMvc : 
+it is equivalent to <mvc:annotation-driven /> in XML. 
+It enables support for @Controller-annotated classes that use @RequestMapping to map incoming requests to a certain method.
+
+Eg: using with controller
+@EnableWebMvc
+@ComponentScan(basePackages = { "com.example.controller" })
+
+MyWebAppInitializer : similar to web.xml
+extends AbstractAnnotationConfigDispatcherServletInitializer
+this class overrides : two configuration used here : telling container load all dependent beans
+   @Override
+   protected Class<?>[] getRootConfigClasses() {
+      return new Class[]{RootConfig.class};
+   }
+
+   @Override
+   protected Class<?>[] getServletConfigClasses() {
+      return new Class[]{WebConfig.class};
+   }
+
+   @Override
+   protected String[] getServletMappings() {
+      return new String[]{"/"};
+   }
