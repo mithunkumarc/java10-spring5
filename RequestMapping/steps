@@ -1,0 +1,21 @@
+The @RequestMapping annotation is used to map the web request onto a handler class (i.e. Controller) or a handler method
+
+The value attribute of the @RequetMapping annotation is used to map the handler method to a path and it can be written as   @GetMapping(value="/one") , which is equivalent to @GetMapping("/one").
+
+Spring also provides five method-level composed variant of the @RequestMapping annotation -
+
+    @GetMapping → equivalent to @RequestMapping(method = RequestMethod.GET).
+    @PostMapping → equivalent to @RequestMapping(method = RequestMethod.POST).
+    @PutMapping → equivalent to @RequestMapping(method = RequestMethod.PUT).
+    @DeleteMapping → equivalent to @RequestMapping(method = RequestMethod.DELETE).
+    @PatchMapping → equivalent to @RequestMapping(method = RequestMethod.PATCH).
+    
+    
+
+    steps.
+    1.create dynamic web project
+    2.configure to maven
+    3.pom.xml dependencies
+    4.configuration classes
+    5.controller class
+    6.views
