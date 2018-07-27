@@ -31,3 +31,13 @@ this class overrides : two configuration used here : telling container load all 
    protected String[] getServletMappings() {
       return new String[]{"/"};
    }
+
+
+viewResolver : InternalResourceViewResolver dependency defined in webConfig file
+Controller returns view name through which response must be sent, the url will be resolved by InternalResourceViewResolver.
+Eg  :
+@RequestMapping(path={"/hello"},method=RequestMethod.GET)
+   public String sayHello(Model model) {
+	 //code...  
+      return "index";      //InternalResourceViewResolver, forms url around index.jsp using prefix and suffix
+   }
