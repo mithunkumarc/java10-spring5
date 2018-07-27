@@ -1,0 +1,48 @@
+dynamic web project converted to maven, check pom.xml for dependencies
+
+@RequestParameter used to binding request parameters to method parameters
+
+in this example views for response are not used and no bean components are defined.
+so no RootConfig class
+
+The @RequestParam annotation binds a web request parameter (i.e. query string) to a method parameter in a controller.
+
+
+1.mapping to method parameters
+@RequestParam(name = "name") String name) 
+
+2.mapping to method parameters without using key value pair
+@RequestParam String firstName, @RequestParam String lastName) 
+
+3.mapping to method param with type
+   @RequestParam("name") String name, 
+   @RequestParam("age") int age,
+   @RequestParam("amount") double amount, 
+   @RequestParam("active") boolean active) 
+
+  
+ 4.mapping request param to method attribute which is map
+ public String handler(@RequestParam Map<String, String> params) 
+ 
+ 
+ 5.optional request parameter
+   
+   @RequestParam("firstName") String firstName,
+   @RequestParam(name = "middleName", required = false) String middleName,
+   @RequestParam("lastName") String lastName) {
+
+
+
+6.request parameters as date and time
+     @DateTimeFormat(pattern = "yyyy-MM-dd") @RequestParam("date") LocalDate date,
+     @DateTimeFormat(pattern = "HH:mm:ss") @RequestParam("time") LocalTime time) 
+
+
+7.binding request params to array and list
+    @RequestParam("country") String[] country, 
+    @RequestParam("city") List<String> city) 
+
+
+8.default value for request param
+  @RequestParam(name = "code", defaultValue = "10") int code
+       
