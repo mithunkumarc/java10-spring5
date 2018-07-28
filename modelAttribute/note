@@ -1,3 +1,10 @@
+convert dynamic web project to maven with dependencies
+webconfig : view resolver
+webappinitializer : mention webconfig, no rootconfig in this sample
+
+output ; http://localhost:8085/ModelAttribute/
+---------------------------------------------------------------------------------------------------------------------
+
 @MethodAnnotation that binds a method parameter or method return value to a named model attribute, exposed to a web view. 
 Supported for controller classes with @RequestMapping methods.
 
