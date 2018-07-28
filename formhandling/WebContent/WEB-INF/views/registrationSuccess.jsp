@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>BORAJI.COM</title>
+<title>user details saved</title>
 </head>
 <body>
    <h1>${message}</h1>
