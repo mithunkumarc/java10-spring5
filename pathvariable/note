@@ -1,0 +1,54 @@
+convert dynamic web project to maven
+add dependencies
+
+request carry parameters in two ways
+1.query parameter key - map pair, ?name='raj'&age=27
+2.path parameter /projectname/raj/27
+
+path
+In Spring MVC, the @PathVariable annotation binds a URI template variable to a method parameter in a controller.
+
+1.single path parameter
+	//link : http://localhost:8085/PathVariable/request1/rutherford
+   @GetMapping("/request1/{name}")
+   public String handler(@PathVariable(name = "name") String name) {
+   
+   
+ 2.two path paratmeter
+   //link : http://localhost:8085/PathVariable/request2/robin/hood
+   @GetMapping("/request2/{firstName}/{lastName}")
+   public String handler(@PathVariable String firstName, @PathVariable String lastName) 
+   
+   
+   
+3.path parameter with different datatype
+   //link : http://localhost:8085/PathVariable/request3/djokovic/30/45000.00/1
+   @GetMapping("/request3/{name}/{age}/{salary}/{active}")
+   public String handler(@PathVariable("name") String name, 
+         @PathVariable("age") int age,
+         @PathVariable("salary") double salary, 
+         @PathVariable("active") boolean active) 
+         
+         
+         
+4.path param to java map
+
+   // request4/David/45/address/India/Delhi
+   // all req param mapped to pathvar Map except address
+   @GetMapping("/request4/{name}/{age}/address/{city}/{country}")
+   public String handler(@PathVariable Map<String, String> params) {
+   
+
+5.  date and time 
+   // link : http://localhost:8085/PathVariable/request5/2017-04-09/12:15:25
+   @GetMapping("/request5/{date}/{time}")
+   public String handler(
+         @DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable("date") LocalDate date,
+         @DateTimeFormat(pattern = "HH:mm:ss") @PathVariable("time") LocalTime time) {
+
+
+6.array and list
+   // link : http://localhost:8085/PathVariable/request6/IND,SRI,BAN/delhi,columbo,chittagong
+   @GetMapping("/request6/{country}/{city}")
+   public String handler(@PathVariable("country") String[] country, 
+         @PathVariable("city") List<String> city) {
