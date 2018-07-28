@@ -1,5 +1,6 @@
 convert dynamic web project to maven and dependencies
 
+model attribute defined in controller available in views also
 
 webappinitializer : telling container to load beans mentioned in rootconfig and webappconfig
 rootconfig : dao and service dependencies (not required in this sample)
