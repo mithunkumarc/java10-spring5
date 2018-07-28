@@ -1,0 +1,85 @@
+dynamic project to maven and add dependencies
+
+webConfig - enable matrix variable 
+UrlPathHelper pathHelper = new UrlPathHelper();
+      //Enable matrix variable
+      pathHelper.setRemoveSemicolonContent(false);
+      configurer.setUrlPathHelper(pathHelper);
+      
+ webappinitlizer : include RootConfig(not required inthis sample) and webConfig
+ 
+ Controller handler methods to handle matrix parameters
+ 
+ -----------------------------------------------------------------------------------------------------------
+ In Spring MVC, a name-value pair within a path segment is referred as matrix variable. 
+ Matrix variables can appear in any path segment, each variable separated with a semicolon (;) 
+ and multiple values are separated by comma (,);
+
+Following are the examples of matrix variables-
+
+ http://www.example.com/user/firstName=Sunil/lastName=Singh
+ http://www.example.com/employee/Mike;salary=45000;dept=HR
+ http://www.example.com/car/Audi;color=RED,BLACK,WHITE
+
+The @MatrixVariable annotation is used to bind the matrix variables to method parameters in a controller.
+
+
+
+example : 
+
+  1.accepting single matrix variable both
+  //link:http://localhost:8085/MatrixVariable/user/name=brendon
+   @GetMapping("/user/{name}") 
+   public String handler(@MatrixVariable("name") String name) {
+   
+   
+   2.two matrix param
+   //link:http://localhost:8085/MatrixVariable/user/firstName=Sidney/lastName=Sheldon
+   @GetMapping("/user/{firstName}/{lastName}")
+   public String handler(@MatrixVariable("firstName") String firstName,
+         @MatrixVariable("lastName") String lastName
+         ) {
+
+
+3.both pathvariable and matrix variable
+   //http://localhost:8085/MatrixVariable/employee/Mike;salary=45000;dept=HR
+   @GetMapping("/employee/{name}") 
+   public String handler(@PathVariable("name") String name,
+         @MatrixVariable("salary") double salary,
+         @MatrixVariable("dept") String dept
+         )
+         
+ 4.mixed path variable and matrix variables. at different positions
+   //http://localhost:8085/MatrixVariable/employee/Mike;id=12;dept=HR;/India;id=25
+   //mixed path var and matrix variable
+   @GetMapping("/employee/{name}/{address}")   
+   public String handler(@PathVariable("name") String name,
+         @MatrixVariable(name="id", pathVar="name") int empId,
+         @MatrixVariable("dept") String dept,
+         @PathVariable("address") String address,
+         @MatrixVariable(name="id", pathVar="name") int addrId
+         ) 
+         
+  5.path and matrix param as array 
+   /*
+    * Binding matrix variable with multiple values
+    */
+   //path and matrix param as list
+   //link : http://localhost:8085/MatrixVariable/car/Audi;color=RED,BLACK,WHITE25
+   @GetMapping("/car/{name}")  
+   public String handler(@PathVariable("name") String name,
+         @MatrixVariable("color") String[] color
+         ) 
+         
+         
+  6.date and optional matrix variable   
+   /*
+    * Binding a matrix variable with optional and default value
+    */
+   //path and date and optional matrix param
+   //link : http://localhost:8085/MatrixVariable/person/Mike;dob=2017-02-12
+   @GetMapping("/person/{name}")
+      public String handler(@PathVariable("name") String name,
+         @MatrixVariable("dob") @DateTimeFormat(pattern="yyyy-MM-dd") LocalDate dob,
+         @MatrixVariable(required=false, defaultValue="91XXXXXXXX") String mobile
+         ) 
