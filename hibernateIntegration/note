@@ -1,0 +1,18 @@
+not required dynamic web project, create java maven project
+prepare db :  
+database name : spring
+table : 
+      create table USERS 
+      (id int primary key auto_increment, 
+      FIRST_NAME text,
+      LAST_NAME text,
+      EMAIL text
+      );
+1.pom.xml dependencies
+2.configure db.properties
+3.Entity User.java
+4.AppConfig : componentScan(service and repository classes) , @EnableTransactionManagement to enable tx management
+4.UserDao (@Repository): dependency sessionFactory(LocalSessionFactoryBean), configurer in AppConfig
+5.UserService (@Service): dependency UserDao
+6.@Repository @Service dependencies defined in AppConfig , beans will be injected at runtime
+7.Test class
