@@ -1,0 +1,40 @@
+dynamic web project to maven
+1.message.properties : define error messages here
+2.pom.xml
+3.controller : bind validator usin @InitBinder
+4.handler methods, add BindingResult obj as parameter
+5.custom validator class : override validate method bind error messages 
+5.jsp, use same name as defined in validator
+6.use <form:errors > tag to display error
+7.webConfig : componentScan(controller package, validator package), configure view resolver and message.properties
+//controller also type of component bean like @Repository and @Service
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+In Spring MVC, Validator interface can be used to validate all fields of a form. 
+We can configure it within a controller class through the @InitBinder annotation.
+
+@InitBinder
+   protected void initBinder(WebDataBinder binder) {
+      binder.addValidators(studentValidator);
+   }
+
+The @InitBinder annotation is method level annotation, used to initialize the WebDataBinder.  
+The WebDataBinder class binds the web request parameters to model objects on each http request.
+
+We can register a custom Validtor within a controller class via the WebDataBinder.addValidators() method. 
+When an argument or model object, annotated with @Validated annotation, of a handler method is encountered, 
+it will be validated by registered custom validator.
+
+If any validation violations have been detected,
+it will automatically be exposed as errors in the BindingResult, which is accessible as an argument in handler method.
+   
+   @PostMapping("/saveStudent")
+   public String saveUser(@ModelAttribute("student") @Validated Student student, BindingResult result,
+         Model model) {
+
+      if (result.hasErrors()) {
+         return "studentForm";
+      }
+      return "success";
+   }
