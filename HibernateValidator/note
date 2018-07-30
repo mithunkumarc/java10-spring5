@@ -1,0 +1,11 @@
+Form validation using hibernate validator
+
+1.configure dynamic web project to maven
+2.dependencies in pom.xml
+3.Student.java class
+4.BindingResult will check targeted object for form validation error.
+5.WebConfig : configure viewResolver, message.properties and LocalValidatorFactoryBean 
+configure LocalValidatorFactoryBean in webAppConfig because bindingResult need validator(LocalValidatorFactoryBean).
+*LocalValidatorFactoryBean implements both javax.validation.Validator* and org.springframework.validation.Validator. 
+6.webAppInitializer(container configuration) : webappconfig
+7.studenForm with error tags
