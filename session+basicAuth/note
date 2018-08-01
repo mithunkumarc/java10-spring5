@@ -36,3 +36,5 @@ Flow :
 
 5.configureGlobalSecurity in spring security can be used to authenticate against inmemory or database
 
+6.WebSecurityConfigurerAdapter: actual authentication happens here. 
+every time new login request will be intercepted by HttpSecurity check against inmemory or database.
