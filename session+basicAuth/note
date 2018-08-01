@@ -38,3 +38,9 @@ Flow :
 
 6.WebSecurityConfigurerAdapter: actual authentication happens here. 
 every time new login request will be intercepted by HttpSecurity check against inmemory or database.
+
+7.for logout , in controller. session handled by spring security api
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	if (auth != null){    
+		new SecurityContextLogoutHandler().logout(request, response, auth);
+	}
