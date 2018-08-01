@@ -1,0 +1,38 @@
+1.dynamic project to maven
+2.dependencies
+3.controller
+4.mvcwebappinitializer : HelloWorldConfig(AppConfig) view resolver
+  WebApplicationInitializer to register a DispatcherServlet and use Java-based Spring configuration.  
+  replacing web.xml
+5.SecurityWebApplicationInitializer : for interception req for auth using spring security ...
+  Registers the DelegatingFilterProxy to use the springSecurityFilterChain before any other registered Filter. 
+  When used with AbstractSecurityWebApplicationInitializer(Class...), it will also register a ContextLoaderListener. 
+  When used with AbstractSecurityWebApplicationInitializer(), 
+  this class is typically used in addition to a subclass of AbstractContextLoaderInitializer.
+6.SecurityConfiguration : configure auth and url
+  WebSecurityConfigurerAdapter : To enable HTTP Security in Spring, we need to extend the WebSecurityConfigurerAdapter 
+  to provide a default configuration in the configure(HttpSecurity http) method
+
+Flow :
+1.when you run this app you will get welcome.jsp
+
+2.when you send request using http://localhost:8085/Session/admin without authentication you will be forwarded to login page.
+  this is configured in security config class
+  http.authorizeRequests()
+	  	.antMatchers("/admin/**").access("hasRole('ADMIN')")
+	  	.and().formLogin().loginPage("/login")
+3.admin, db page cannot be accessed with out login authentication, delegate filter will handle this
+  ssoId and password are keys for username and password in login.jsp
+  
+  http.authorizeRequests()
+	  	.antMatchers("/", "/home").permitAll()
+	  	.antMatchers("/admin/**").access("hasRole('ADMIN')")
+	  	.antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
+	  	.and().formLogin().loginPage("/login")
+	  	.usernameParameter("ssoId").passwordParameter("password")
+	  	.and().exceptionHandling().accessDeniedPage("/Access_Denied");
+
+4.request will not even reach controller without authentication, becuase delegatefilter will intercept for authentication.
+
+5.configureGlobalSecurity in spring security can be used to authenticate against inmemory or database
+
