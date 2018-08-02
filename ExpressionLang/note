@@ -1,0 +1,26 @@
+appconfig : load components model and expression test classes
+java project configure to maven
+
+The Spring Expression Language (SpEL for short) is a powerful expression language 
+that supports querying and manipulating an object graph at runtime. 
+The language syntax is similar to Unified EL but offers additional features, 
+most notably method invocation and basic string templating functionality.
+
+
+SpEL supports a wide range of features, such as calling methods, accessing properties, and calling constructors.
+
+As an example of method invocation, we call the concat method on the string literal.
+
+ExpressionParser parser = new SpelExpressionParser();
+Expression exp = parser.parseExpression("'Hello World'.concat('!')");
+String message = (String) exp.getValue();
+
+The value of message is now 'Hello World!'.
+
+As an example of calling a JavaBean property, the String property Bytes can be called as shown below.
+
+ExpressionParser parser = new SpelExpressionParser();
+
+// invokes 'getBytes()'
+Expression exp = parser.parseExpression("'Hello World'.bytes");
+byte[] bytes = (byte[]) exp.getValue();
