@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class Customer {
 	private BankAccount bankAccount;
 	
-	@Resource
+	@Resource(name="icici")
 	public void setBankAccount(BankAccount bankAccount) {
 		this.bankAccount = bankAccount;
 	}
