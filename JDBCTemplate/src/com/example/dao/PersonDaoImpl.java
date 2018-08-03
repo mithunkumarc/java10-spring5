@@ -20,6 +20,7 @@ public class PersonDaoImpl implements PersonDao {
 
 	@Autowired
 	public PersonDaoImpl(DataSource dataSource) {
+		//datasource object injected by spring container, configured in AppConfig class
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
