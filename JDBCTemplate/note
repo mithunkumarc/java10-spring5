@@ -1,0 +1,21 @@
+1.java project to maven
+2.database name : spring
+3.table and table data : 
+        create table people (
+        id int primary key auto_increment,
+        first_name varchar(20) not null,
+        last_name varchar(20) not null,
+        age int not null
+        );
+
+        insert into people (first_name, last_name, age) values
+        ('Vlad', 'Boyarskiy', 21),
+        ('Oksi', ' Bahatskaya', 30),
+        ('Vadim', ' Vadimich', 32);
+        
+4.pom.xml dependencies
+5.database.properties : add username password url and driver
+6.key class RowMapper , similar to mapping in hibernate(not exactly)
+  Person object will be mapped to the result of sql query through resultSet
+7.Dao class must create JdbcTemplate class to perform crud operation on database.
+
