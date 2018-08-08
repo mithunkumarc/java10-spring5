@@ -1,0 +1,26 @@
+spring transaction will handle beginning, commit and rollback the transaction
+
+prepare database :
+
+create database txm;
+
+use txm;
+
+CREATE TABLE `Customer` (
+  `id` int(11) unsigned NOT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `Address` (
+  `id` int(11) unsigned NOT NULL,
+  `address` varchar(20) DEFAULT NULL,
+  `country` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+); 
+
+
+
+* : CustomerManager is a service class
+* : use @Transactional for dao methods
+* : @Transactional belongs to org.springframework.transaction.annotation.Transactional
