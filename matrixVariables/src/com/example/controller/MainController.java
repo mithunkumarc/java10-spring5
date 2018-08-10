@@ -71,7 +71,7 @@ public class MainController {
          @MatrixVariable(name="id", pathVar="name") int empId,
          @MatrixVariable("dept") String dept,
          @PathVariable("address") String address,
-         @MatrixVariable(name="id", pathVar="name") int addrId
+         @MatrixVariable(name="id", pathVar="address") int addrId
          ) {
 
       return "Path Variables <br>"
