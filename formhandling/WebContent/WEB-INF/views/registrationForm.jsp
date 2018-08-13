@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>BORAJI.COM</title>
+<title>form handling</title>
 </head>
 <body>
    <h1>User Registration Form</h1>
