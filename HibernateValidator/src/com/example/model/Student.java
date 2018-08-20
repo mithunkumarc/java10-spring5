@@ -15,7 +15,7 @@ public class Student {
    @NotEmpty(message = "{student.subjects.empty}")
    private List<String> subjects;
    
- 
+   @NotEmpty(message = "{student.email.empty}")		
    @Email(message = "{student.email.invalid}")
 	private String email;
    
