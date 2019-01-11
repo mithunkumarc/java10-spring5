@@ -1,17 +1,19 @@
-# spring boot 2.2, spring 5.1 supports java 11 : 
+### spring boot 2.2, spring 5.1 supports java 11 : 
 
 # spring4
 examples
 java 1.8
 
-  helloworld-xml 	using xml
-  helloworld-annotations 
+  	helloworld-xml 	using xml
+  	helloworld-annotations 
+	
 	DI Annotation New
 	DI initialize bean NEW 
 	Di bean with Collection property 	
 	Di_initializeBeanProperties 	
 	ComponentScan 	
-  PostConstructPreDestroy 	alternate for @PostConstruct and @predestroy 	a day ago
+  	PostConstructPreDestroy 	alternate for @PostConstruct and @predestroy 	a day ago
+	
 	QualifierAnnotation 	Update notes 	18 hours ago
 	RequestMapping 	Create steps 	6 minutes ago
 	ResourceAnnotation 	@resource vs @Autowired @Inject 	22 hours ago
