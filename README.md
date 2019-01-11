@@ -1,3 +1,5 @@
+# spring boot 2.2, spring 5.1 supports java 11 : 
+
 # spring4
 examples
 java 1.8
